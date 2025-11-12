@@ -9,7 +9,7 @@ class DataBaseConnect {
     private $dbname = 'your_database_name'; 
     private $username = 'your_username'; 
     private $password = 'your_password'; 
-    private $pdo;
+    public $pdo;
     public function __construct() {
         $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname;
         $this->pdo = new PDO($dsn, $this->username, $this->password);
