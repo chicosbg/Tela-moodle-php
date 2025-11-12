@@ -7,6 +7,10 @@ use Conexao\DataBaseConnect;
 
 $conn = new DataBaseConnect();
 
-$sql = "";
+$sql = 'SELECT @@version;';
 
-$stmt = $this->pdo->prepare($sql);
+$stmt = $conn->pdo->prepare($sql);
+
+print_r($stmt->execute());
+
+print_r($stmt->fetchAll(PDO::FETCH_ASSOC));
