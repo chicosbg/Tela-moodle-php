@@ -15,16 +15,17 @@ class MoodleDataFetcher {
         $sql = "
             SELECT 
                 a.id,
-                a.name as titulo,
-                c.fullname as curso,
-                a.duedate as data_entrega,
-                'TAREFA' as tipo,
-                'assign' as tipo_tabela
-            FROM mdl_assign a
-            JOIN mdl_course c ON a.course = c.id
-            WHERE a.duedate > UNIX_TIMESTAMP()
-            ORDER BY a.duedate ASC
-            
+                a.name AS titulo,
+                c.fullname AS curso,
+                a.duedate AS data_entrega,
+                'TAREFA' AS tipo,
+                'assign' AS tipo_tabela
+            FROM
+                mdl_assign a
+            JOIN
+                mdl_course c ON a.course = c.id
+            where
+            a.duedate > UNIX_TIMESTAMP()
             UNION ALL
             
             SELECT 
