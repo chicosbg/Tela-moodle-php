@@ -13,7 +13,7 @@ class MoodleDataFetcher {
     
     public function getAtividadesPendentes() {
         $sql = "
-            SELECT 
+            SELECT
                 a.id,
                 a.name AS titulo,
                 c.fullname AS curso,
@@ -27,19 +27,23 @@ class MoodleDataFetcher {
             where
             a.duedate > UNIX_TIMESTAMP()
             UNION ALL
-            
-            SELECT 
+
+            SELECT
                 q.id,
-                q.name as titulo,
-                c.fullname as curso,
-                q.timeclose as data_entrega,
-                'QUESTIONÁRIO' as tipo,
-                'quiz' as tipo_tabela
-            FROM mdl_quiz q
-            JOIN mdl_course c ON q.course = c.id
-            WHERE q.timeclose > UNIX_TIMESTAMP()
-            ORDER BY data_entrega ASC
-            LIMIT 50
+                q.name AS titulo,
+                c.fullname AS curso,
+                q.timeclose AS data_entrega,
+                'QUESTIONÁRIO' AS tipo,
+                'quiz' AS tipo_tabela
+            FROM
+                mdl_quiz q
+            left JOIN
+                mdl_course c ON q.course = c.id
+            where
+            q.timeclose > UNIX_TIMESTAMP()
+            ORDER BY
+                data_entrega ASC
+            LIMIT 50;
         ";
         
         try {
@@ -153,18 +157,3 @@ class MoodleDataFetcher {
     }
 }
 
-// Funções auxiliares (helpers)
-function formatarData($timestamp) {
-    return date('d/m/Y H:i', $timestamp);
-}
-
-function calcularDiasRestantes($timestamp) {
-    $agora = time();
-    $diferenca = $timestamp - $agora;
-    return ceil($diferenca / (24 * 60 * 60));
-}
-
-function isUrgente($dias) {
-    return $dias <= 7;
-}
-?>

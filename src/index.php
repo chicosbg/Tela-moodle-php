@@ -34,4 +34,3 @@ include "views/stats-cards.php";
 include "views/atividades-lista.php";
 include "views/eventos-lista.php";
 include "views/footer.php";
-?>
