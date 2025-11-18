@@ -4,7 +4,7 @@ use Utils\TimeUtils;
 ?>
 
 <!-- Notificações Recentes -->
-<div class="card">
+<!-- <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2 style="margin: 0;">
             🔔 Notificações Recentes
@@ -75,4 +75,4 @@ use Utils\TimeUtils;
             <?php endif; ?>
         <?php endif; ?>
     </div>
-</div>
+</div> -->

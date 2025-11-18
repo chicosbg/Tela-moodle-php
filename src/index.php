@@ -38,13 +38,9 @@ try {
 
 // Carregar views
 
-
-
 include "views/header.php";
 include "views/stats-cards.php";
-include "views/notificacoes-lista.php";
 include "views/atividades-lista.php";
-include "views/eventos-lista.php";
 include "views/footer.php";
 
 

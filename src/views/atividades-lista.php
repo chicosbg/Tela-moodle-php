@@ -65,55 +65,41 @@ use Utils\TimeUtils;
         </div>
     </div>
  
-    <!-- Eventos do calendário -->
-    <div class="card">
+<!-- Eventos do calendário -->
+<!-- <div class="card">
         <h2>📅 Próximos Eventos</h2>
         <div class="list">
-            <div class="list-item">
-                <div class="item-header">
-                    <strong>Prova P2 - Algoritmos</strong>
-                </div>
-                <div class="item-details">
-                    <span class="curso">Algoritmos e Programação II</span>
-                    <span class="data">📅 25/10/2025 19:00</span>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="item-header">
-                    <strong>Aula de Revisão - Cálculo</strong>
-                </div>
-                <div class="item-details">
-                    <span class="curso">Cálculo Diferencial e Integral</span>
-                    <span class="data">📅 23/10/2025 14:00</span>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="item-header">
-                    <strong>Seminário: Arquitetura MVC</strong>
-                </div>
-                <div class="item-details">
-                    <span class="curso">Engenharia de Software</span>
-                    <span class="data">📅 27/10/2025 10:00</span>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="item-header">
-                    <strong>Entrega de Trabalho em Grupo</strong>
-                </div>
-                <div class="item-details">
-                    <span class="curso">Banco de Dados I</span>
-                    <span class="data">📅 30/10/2025 20:00</span>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="item-header">
-                    <strong>Palestra: Carreira em TI</strong>
-                </div>
-                <div class="item-details">
-                    <span class="data">📅 02/11/2025 15:00</span>
-                </div>
-            </div>
+            <?php
+            // Filtrar eventos que ainda não passaram e ordenar cronologicamente
+            $hoje = time();
+            $eventos_futuros = array_filter($eventos_calendario ?? [], function($evento) use ($hoje) {
+                $data_evento = strtotime($evento['data']);
+                return $data_evento > $hoje;
+            });
+            
+            // Ordenar por data
+            usort($eventos_futuros, function($a, $b) {
+                $data_a = strtotime($a['data']);
+                $data_b = strtotime($b['data']);
+                return $data_a - $data_b;
+            });
+            
+            if (empty($eventos_futuros)): ?>
+                <div class="empty-message">Nenhum evento programado</div>
+            <?php else: ?>
+                <?php foreach ($eventos_futuros as $evento): ?>
+                    <div class="list-item">
+                        <div class="item-header">
+                            <strong><?php echo is_null($evento['titulo']) ? 'Não informado' : htmlspecialchars($evento['titulo']); ?></strong>
+                        </div>
+                        <div class="item-details">
+                            <span class="curso"><?php echo is_null($evento['curso']) ? 'Não informado' : htmlspecialchars($evento['curso']); ?></span>
+                            <span class="data">📅 <?php echo TimeUtils::formatarData(strtotime($evento['data'])); ?></span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
-    </div>
+    </div> -->
 
     </div>

@@ -28,7 +28,7 @@ header {
 }
 
 header h1 {
-    color: #667eea;
+    color: grey;
     font-size: 2.5em;
     margin-bottom: 10px;
 }
@@ -59,7 +59,7 @@ header h1 {
 }
 
 .stat-card.urgente {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #ea5f4d 0%, #d81717 100%);
     color: white;
 }
 
@@ -90,7 +90,7 @@ header h1 {
 }
 
 .card h2 {
-    color: #667eea;
+    color: gray;
     margin-bottom: 20px;
     font-size: 1.5em;
     border-bottom: 2px solid #f0f0f0;
@@ -107,7 +107,7 @@ header h1 {
     background: #f8f9fa;
     padding: 15px;
     border-radius: 8px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid gray;
     transition: all 0.3s ease;
 }
 
@@ -144,7 +144,7 @@ header h1 {
 }
 
 .curso {
-    color: #667eea;
+    color: gray;
     font-weight: 500;
 }
 
@@ -153,7 +153,7 @@ header h1 {
 }
 
 .sigla {
-    background: #667eea;
+    background: gray;
     color: white;
     padding: 2px 8px;
     border-radius: 4px;
@@ -161,7 +161,7 @@ header h1 {
 }
 
 .badge {
-    background: #667eea;
+    background: gray;
     color: white;
     padding: 4px 12px;
     border-radius: 20px;
@@ -196,7 +196,7 @@ footer {
 }
 
 footer a {
-    color: #667eea;
+    color: gray;
     text-decoration: none;
     font-weight: 500;
 }
@@ -210,7 +210,7 @@ footer a:hover {
    ============================================ */
 
 .config-container {
-    max-width: 900px;
+    /* max-width: 900px; */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -227,11 +227,11 @@ footer a:hover {
     padding: 20px;
     background: #f8f9fa;
     border-radius: 8px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid gray;
 }
 
 .form-section h3 {
-    color: #667eea;
+    color: gray;
     margin-bottom: 15px;
     font-size: 1.3em;
 }
@@ -266,7 +266,7 @@ footer a:hover {
 .form-group input[type="number"]:focus,
 .form-group input[type="time"]:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: gray;
 }
 
 .input-with-unit {
@@ -335,7 +335,7 @@ footer a:hover {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f6921d 0%, #ef5220 100%);
     color: white;
 }
 
@@ -406,7 +406,7 @@ footer a:hover {
     background: #fff;
     padding: 15px;
     border-radius: 8px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid gray;
     margin-bottom: 10px;
     transition: all 0.3s ease;
 }
@@ -426,7 +426,7 @@ footer a:hover {
 }
 
 .notification-item.change {
-    border-left-color: #9c27b0;
+    border-left-color: gray;
 }
 
 .notification-header {
