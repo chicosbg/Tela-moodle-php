@@ -9,7 +9,7 @@ class EmailController {
 
     public function __construct() {}
 
-    public function Enviar($email, $subject, $body) {
+    public function  Enviar($email, $subject, $body) {
         $this->config_email();
 
         $this->mail->addAddress($email);
