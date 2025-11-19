@@ -1,9 +1,13 @@
 <?php
 require_once "conexao/DataBaseConnect.php";
 require_once "models/UserPreferences.php";
-
+require_once "../vendor/autoload.php";
 use Conexao\DataBaseConnect;
 use Models\UserPreferences;
+
+use Dotenv\Dotenv;
+$dotenv = Dotenv::createImmutable('../');
+$dotenv->load();
 
 // Processar atualização de preferências
 $success = null;

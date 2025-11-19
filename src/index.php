@@ -8,9 +8,9 @@ use Conexao\DataBaseConnect;
 use Models\MoodleDataFetcher;
 use Models\NotificationManager;
 use Dotenv\Dotenv;
-
 $dotenv = Dotenv::createImmutable('../');
 $dotenv->load();
+
 
 
 // Inicialização
@@ -22,7 +22,6 @@ try {
     // Buscar dados
     $atividades = $dataFetcher->getAtividadesPendentes();
     $estatisticas = $dataFetcher->getEstatisticas($atividades);
-    $eventos = $dataFetcher->getProximosEventos();
     
     // Buscar notificações
     $notificacoes = $notificationManager->getRecentNotifications(10);

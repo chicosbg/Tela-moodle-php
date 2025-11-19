@@ -103,47 +103,4 @@ class MoodleDataFetcher {
         ];
     }
     
-    public function getProximosEventos() {
-        $sql = "
-            SELECT 
-                e.name as titulo,
-                e.timestart as data_evento,
-                'evento' as tipo
-            FROM mdl_event e
-            WHERE e.timestart > UNIX_TIMESTAMP()
-            AND e.timestart < UNIX_TIMESTAMP() + (30 * 24 * 60 * 60)
-            
-            UNION ALL
-            
-            SELECT 
-                a.name as titulo,
-                a.duedate as data_evento,
-                CONCAT('tarefa_', a.id) as tipo
-            FROM mdl_assign a
-            WHERE a.duedate > UNIX_TIMESTAMP()
-            AND a.duedate < UNIX_TIMESTAMP() + (7 * 24 * 60 * 60)
-            
-            UNION ALL
-            
-            SELECT 
-                q.name as titulo,
-                q.timeclose as data_evento,
-                CONCAT('quiz_', q.id) as tipo
-            FROM mdl_quiz q
-            WHERE q.timeclose > UNIX_TIMESTAMP()
-            AND q.timeclose < UNIX_TIMESTAMP() + (7 * 24 * 60 * 60)
-            
-            ORDER BY data_evento ASC
-            LIMIT 15
-        ";
-        
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (\Exception $e) {
-            error_log("Erro ao buscar eventos: " . $e->getMessage());
-            return [];
-        }
-    }
 }
