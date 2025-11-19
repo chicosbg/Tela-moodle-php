@@ -12,9 +12,6 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable('../');
 $dotenv->load();
 
-print_r($_ENV['DB_HOST'] . ':' . $_ENV['DB_PORT']);
-exit() ;
-
 
 // Inicialização
 try {
