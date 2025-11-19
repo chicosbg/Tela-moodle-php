@@ -12,7 +12,8 @@ class NotificacaoController {
         
         $notificaoSender = new NotificationSender(new DataBaseConnect());
         try {
-            print_r($notificaoSender->processAllNotifications());
+            $notificaoSender->processAllNotifications();
+            // print_r($notificaoSender->processAllNotifications());
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
