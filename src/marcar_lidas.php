@@ -1,4 +1,16 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// ATIVAR DISPLAY DE ERROS - REMOVA DEPOIS
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Carregar variáveis de ambiente PRIMEIRO
+use Dotenv\Dotenv;
+$dotenv = Dotenv::createImmutable('../');
+$dotenv->load();
+
 require_once "conexao/DataBaseConnect.php";
 require_once "models/NotificationManager.php";
 
@@ -9,11 +21,8 @@ try {
     $conn = new DataBaseConnect();
     $notificationManager = new NotificationManager($conn);
     
-    // Marcar todas como lidas
-    // $notificationManager->markAllAsRead();
-    
-    // Redirecionar de volta ao dashboard
-    header('Location: index.php');
+    $notificationManager->markAllAsRead();
+    header('Location: index.php?refresh=' . time());
     exit;
     
 } catch (Exception $e) {

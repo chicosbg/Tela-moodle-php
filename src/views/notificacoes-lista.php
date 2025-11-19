@@ -4,10 +4,10 @@ use Utils\TimeUtils;
 ?>
 
 <!-- Notificações Recentes -->
-<!-- <div class="card">
+<div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2 style="margin: 0;">
-            🔔 Notificações Recentes
+            Notificações por Email
             <?php if ($notificacoes_nao_lidas > 0): ?>
                 <span class="notification-badge"><?php echo $notificacoes_nao_lidas; ?></span>
             <?php endif; ?>
@@ -21,10 +21,6 @@ use Utils\TimeUtils;
         <?php if (empty($notificacoes)): ?>
             <div class="empty-message">
                 Nenhuma notificação no momento
-                <br><br>
-                <a href="configuracoes.php" style="color: #667eea;">
-                    Configure suas preferências de notificações →
-                </a>
             </div>
         <?php else: ?>
             <?php foreach ($notificacoes as $notificacao): 
@@ -69,10 +65,10 @@ use Utils\TimeUtils;
             <?php if ($notificacoes_nao_lidas > 0): ?>
                 <div style="text-align: center; margin-top: 15px;">
                     <a href="marcar_lidas.php" class="btn btn-secondary" style="font-size: 0.9em;">
-                        ✅ Marcar todas como lidas
+                        Marcar todas como lidas
                     </a>
                 </div>
             <?php endif; ?>
         <?php endif; ?>
     </div>
-</div> -->
+</div>

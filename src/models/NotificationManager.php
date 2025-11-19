@@ -71,37 +71,39 @@ class NotificationManager {
     /**
      * Obter todas as notificações recentes
      */
-    public function getRecentNotifications($limit = 50) {
-        $sql = "SELECT 
-                    nh.*,
-                    CASE 
-                        WHEN nh.activity_type = 'assign' THEN a.name
-                        WHEN nh.activity_type = 'quiz' THEN q.name
-                    END as activity_name,
-                    CASE 
-                        WHEN nh.activity_type = 'assign' THEN c_a.fullname
-                        WHEN nh.activity_type = 'quiz' THEN c_q.fullname
-                    END as course_name
-                FROM notification_history nh
-                LEFT JOIN mdl_assign a ON nh.activity_id = a.id AND nh.activity_type = 'assign'
-                LEFT JOIN mdl_course c_a ON a.course = c_a.id
-                LEFT JOIN mdl_quiz q ON nh.activity_id = q.id AND nh.activity_type = 'quiz'
-                LEFT JOIN mdl_course c_q ON q.course = c_q.id
-                WHERE nh.user_id = :user_id
-                ORDER BY nh.sent_at DESC
-                LIMIT :limit";
+   public function getRecentNotifications($limit = 50) {
+    $sql = "SELECT 
+                nh.*,
+                CASE 
+                    WHEN nh.activity_type = 'assign' THEN a.name
+                    WHEN nh.activity_type = 'quiz' THEN q.name
+                END as activity_name,
+                CASE 
+                    WHEN nh.activity_type = 'assign' THEN c_a.fullname
+                    WHEN nh.activity_type = 'quiz' THEN c_q.fullname
+                END as course_name
+            FROM notification_history nh
+            LEFT JOIN mdl_assign a ON nh.activity_id = a.id AND nh.activity_type = 'assign'
+            LEFT JOIN mdl_course c_a ON a.course = c_a.id
+            LEFT JOIN mdl_quiz q ON nh.activity_id = q.id AND nh.activity_type = 'quiz'
+            LEFT JOIN mdl_course c_q ON q.course = c_q.id
+            WHERE nh.user_id = :user_id 
+            AND nh.is_read = 0  -- ✅ MOSTRAR APENAS NÃO LIDAS
+            ORDER BY nh.sent_at DESC
+            LIMIT :limit";
+    
+    try {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
         
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
-            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (\Exception $e) {
-            error_log("Erro ao obter notificações recentes: " . $e->getMessage());
-            return [];
-        }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        error_log("Erro ao obter notificações recentes: " . $e->getMessage());
+        return [];
     }
+}
     
     /**
      * Marcar notificação como lida
@@ -126,19 +128,30 @@ class NotificationManager {
     /**
      * Marcar todas as notificações como lidas
      */
-    public function markAllAsRead() {
-        $sql = "UPDATE notification_history 
-                SET is_read = 1, read_at = NOW() 
-                WHERE user_id = :user_id AND is_read = 0";
+public function markAllAsRead() {
+    // ✅ DEBUG: Verificar estado antes da execução
+    error_log("🔍 markAllAsRead - Iniciando...");
+    error_log("🔍 markAllAsRead - PDO disponível: " . ($this->pdo ? 'SIM' : 'NÃO'));
+    error_log("🔍 markAllAsRead - user_id: " . $this->user_id);
+    
+    $sql = "UPDATE notification_history 
+            SET is_read = 1, read_at = NOW() 
+            WHERE user_id = :user_id AND is_read = 0";
+    
+    try {
+        $stmt = $this->pdo->prepare($sql);
+        $result = $stmt->execute([':user_id' => $this->user_id]);
         
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            return $stmt->execute([':user_id' => $this->user_id]);
-        } catch (\Exception $e) {
-            error_log("Erro ao marcar todas como lidas: " . $e->getMessage());
-            return false;
-        }
+        $rowsAffected = $stmt->rowCount();
+        error_log("✅ markAllAsRead - Linhas atualizadas: " . $rowsAffected);
+        
+        return $rowsAffected > 0;
+        
+    } catch (\Exception $e) {
+        error_log("❌ Erro no markAllAsRead: " . $e->getMessage());
+        return false;
     }
+}
     
     /**
      * Contar notificações não lidas

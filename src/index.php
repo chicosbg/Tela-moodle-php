@@ -45,8 +45,11 @@ try {
 // Carregar views
 
 include "views/header.php";
+include "views/notificacoes-lista.php";
 include "views/stats-cards.php";
 include "views/atividades-lista.php";
 include "views/footer.php";
+?>
 
+<!-- <meta http-equiv="refresh" content="2"> -->
 

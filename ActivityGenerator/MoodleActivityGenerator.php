@@ -59,17 +59,17 @@ class MoodleActivityGenerator {
             [
                 'nome' => 'Trabalho Prático - ' . $this->generateRandomName(),
                 'descricao' => 'Desenvolva uma solução prática para o problema proposto.',
-                'dias_vencimento' => rand(7, 30)
+                'dias_vencimento' => rand(1, 7)
             ],
             [
                 'nome' => 'Relatório Técnico - ' . $this->generateRandomName(),
                 'descricao' => 'Elabore um relatório detalhado sobre o tema estudado.',
-                'dias_vencimento' => rand(10, 21)
+                'dias_vencimento' => rand(3, 12)
             ],
             [
                 'nome' => 'Projeto em Grupo - ' . $this->generateRandomName(),
                 'descricao' => 'Trabalho colaborativo para desenvolvimento de projeto.',
-                'dias_vencimento' => rand(14, 35)
+                'dias_vencimento' => rand(3, 15)
             ],
             [
                 'nome' => 'Análise de Caso - ' . $this->generateRandomName(),
@@ -175,7 +175,7 @@ class MoodleActivityGenerator {
         $quiz = $tipos_quiz[array_rand($tipos_quiz)];
         $timestamp = time();
         $timeopen = $timestamp;
-        $timeclose = $timestamp + (rand(7, 21) * 24 * 60 * 60); // 7-21 dias para fechar
+        $timeclose = $timestamp + (rand(1, 10) * 24 * 60 * 60); // 7-21 dias para fechar
         
         $sql = "INSERT INTO mdl_quiz (
                     course, name, intro, introformat, timeopen, timeclose,
@@ -248,8 +248,8 @@ class MoodleActivityGenerator {
     
     private function generateRandomName() {
         $adjetivos = ['Fundamental', 'Avançado', 'Intermediário', 'Básico', 'Complexo', 'Simples', 'Prático', 'Teórico'];
-        $topicos = ['Programação', 'Banco de Dados', 'Redes', 'Segurança', 'Design', 'Matemática', 'Estatística', 'Lógica'];
-        $sufixos = ['2024', 'Módulo II', 'Unidade 3', 'Parte A', 'Versão Final'];
+        $topicos = ['Programação', 'Banco de Dados', 'Execução', 'Segurança', 'Design', 'Modelagem', 'Estatística', 'Prototipação'];
+        $sufixos = ['2025', 'Módulo II', 'Unidade 3', 'Parte A', 'Versão Final'];
         
         return $adjetivos[array_rand($adjetivos)] . ' - ' . 
                $topicos[array_rand($topicos)] . ' - ' . 

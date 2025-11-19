@@ -16,7 +16,7 @@ $dotenv->load();
 // Configurações
 $config = [
     'tempo_espera' => 10,      // Segundos entre cada atividade
-    'max_atividades' => 50,    // Máximo de atividades a criar
+    'max_atividades' => 10,    // Máximo de atividades a criar
     'curso_padrao' => 2,       // ID do curso padrão
     'log_file' => 'moodle_activity_generator.log'
 ];

@@ -10,7 +10,7 @@
     </div>
     <div class="stat-card <?php echo $notificacoes_nao_lidas > 0 ? 'urgente' : ''; ?>">
         <div class="stat-number"><?php echo $notificacoes_nao_lidas; ?></div>
-        <div class="stat-label">Notificações Não Lidas</div>
+        <div class="stat-label">Notificações não Lidas</div>
     </div>
     <div class="stat-card">
         <div class="stat-number"><?php echo count($estatisticas['cursos_ativos']); ?></div>
