@@ -2,10 +2,19 @@
 require_once "conexao/DataBaseConnect.php";
 require_once "models/MoodleDataFetcher.php";
 require_once "models/NotificationManager.php";
+require_once ".." . '/vendor/autoload.php';
 
-use Conexao\DataBaseConnect;
-use Models\MoodleDataFetcher;
-use Models\NotificationManager;
+// use Conexao\DataBaseConnect;
+// use Models\MoodleDataFetcher;
+// use Models\NotificationManager;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable('../');
+$dotenv->load();
+
+print_r($_ENV['DB_HOST'] . ':' . $_ENV['DB_PORT']);
+exit() ;
+
 
 // Inicialização
 try {
