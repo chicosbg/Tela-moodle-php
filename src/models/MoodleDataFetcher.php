@@ -79,19 +79,27 @@ class MoodleDataFetcher {
                 WHERE timecreated > UNIX_TIMESTAMP(CURRENT_DATE())
             ) as atividades_hoje
         ";
+
+        $sql_cursos_ativos = 'SELECT * from mdl_course c where c.visible = 1';
         
         try {
+            $stmt = $this->pdo->prepare($sql_cursos_ativos);
+            $stmt->execute();
+            $cursosAtivos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
             $stmt = $this->pdo->prepare($sql_notificacoes);
             $stmt->execute();
             $notificacoes_hoje = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
         } catch (\Exception $e) {
             $notificacoes_hoje = count($atividades);
         }
+
         
         return [
             'total_pendentes' => count($atividades),
             'entregas_7_dias' => $entregas_7_dias,
-            'notificacoes_hoje' => $notificacoes_hoje
+            'notificacoes_hoje' => $notificacoes_hoje,
+            'cursos_ativos' => $cursosAtivos
         ];
     }
     
