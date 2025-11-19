@@ -26,7 +26,7 @@ class UserPreferences {
             $prefs = $stmt->fetch(PDO::FETCH_ASSOC);
             
             // Se não existir, criar com valores padrão
-            if (!$prefs) {
+            if (is_null($prefs)) {
                 $this->createDefaultPreferences();
                 return $this->getPreferences();
             }
