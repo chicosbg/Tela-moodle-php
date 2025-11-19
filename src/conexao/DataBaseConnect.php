@@ -6,15 +6,15 @@ use PDO;
 use PDOException;
 
 class DataBaseConnect {
-    private $host = $_ENV['DB_HOST'] . ':' . $_ENV['DB_PORT']; 
     private $dbname = 'moodle'; 
-    private $username = $_ENV['DB_USER']; 
-    private $password = $_ENV['DB_PASSWORD']; 
+    private $username; 
+    private $password; 
+    private $host; 
     public $pdo;
 
     public function __construct() {
         try {
-            print_r($_ENV);
+            $this->setEnviroment();
             $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname . ";charset=utf8mb4";
             $this->pdo = new PDO($dsn, $this->username, $this->password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -23,4 +23,9 @@ class DataBaseConnect {
             die("Erro de conexão: " . $e->getMessage());
         }
     }    
+    private function setEnviroment() {
+        $this->host = $_ENV['DB_HOST'] . ':' . $_ENV['DB_PORT'];
+        $this->username = $_ENV['DB_USER'];
+        $this->password = $_ENV['DB_PASSWORD'];
+    }
 }
