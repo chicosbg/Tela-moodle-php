@@ -7,7 +7,7 @@ use Utils\TimeUtils;
 <div class="content-grid">
     <!-- Próximas entregas (7 dias) -->
     <div class="card">
-        <h2>🎯 Próximas Entregas (7 dias)</h2>
+        <h2>Próximas Entregas (7 dias)</h2>
         <div class="list">
             <?php 
             $entregas_7_dias = array_filter($atividades, function($atividade) {
@@ -27,7 +27,7 @@ use Utils\TimeUtils;
                         </div>
                         <div class="item-details">
                             <span class="curso"><?php echo is_null($atividade['curso']) ? 'Não informado' : htmlspecialchars($atividade['curso']); ?></span>
-                            <span class="data">📅 <?php echo TimeUtils::formatarData($atividade['data_entrega']); ?></span>
+                            <span class="data"> <?php echo TimeUtils::formatarData($atividade['data_entrega']); ?></span>
                             <span class="sigla"><?php echo $atividade['tipo']; ?></span>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ use Utils\TimeUtils;
 
     <!-- Todas as atividades pendentes -->
     <div class="card">
-        <h2>📝 Todas as Atividades Pendentes</h2>
+        <h2>Todas as Atividades Pendentes</h2>
         <div class="list">
             <?php if (empty($atividades)): ?>
                 <div class="empty-message">Nenhuma atividade pendente</div>
@@ -56,7 +56,7 @@ use Utils\TimeUtils;
                         </div>
                         <div class="item-details">
                             <span class="curso"><?php echo is_null($atividade['curso']) ? 'Não informado' : htmlspecialchars($atividade['curso']); ?></span>
-                            <span class="data">📅 <?php echo TimeUtils::formatarData($atividade['data_entrega']); ?></span>
+                            <span class="data"> <?php echo TimeUtils::formatarData($atividade['data_entrega']); ?></span>
                             <span class="sigla"><?php echo $atividade['tipo']; ?></span>
                         </div>
                     </div>

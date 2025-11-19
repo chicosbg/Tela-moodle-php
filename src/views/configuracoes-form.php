@@ -17,13 +17,14 @@
         <form method="POST" action="configuracoes.php" class="config-form">
             <!-- Notificações de Prazos -->
             <div class="form-section">
-                <h3>📅 Notificações de Prazos</h3>
+                <h3>Notificações de Prazos</h3>
                 
                 <div class="form-group">
-                    <label class="checkbox-label">
+                    <label class="checkbox-label" style="display:block; cursor:pointer;">
                         <input type="checkbox" 
                                name="notify_deadlines" 
                                value="1"
+                               style="vertical-align:middle;"
                                <?php echo $preferences['notify_deadlines'] ? 'checked' : ''; ?>>
                         <span>Ativar notificações de prazos próximos</span>
                     </label>
@@ -31,7 +32,7 @@
                 
                 <div class="form-group">
                     <label for="hours_before_deadline">
-                        ⏰ Notificar quantas horas antes do prazo?
+                        Notificar quantas horas antes do prazo?
                     </label>
                     <div class="input-with-unit">
                         <input type="number" 
@@ -51,7 +52,7 @@
             
             <!-- Horários de Silêncio -->
             <div class="form-section">
-                <h3>🔕 Horário de Silêncio</h3>
+                <h3>Horário de Silêncio</h3>
                 <p class="section-description">
                     Durante este período, nenhuma notificação será enviada.
                 </p>
@@ -59,7 +60,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="silence_start_time">
-                            🌙 Início do silêncio
+                            Início do silêncio
                         </label>
                         <input type="time" 
                                id="silence_start_time" 
@@ -70,7 +71,7 @@
                     
                     <div class="form-group">
                         <label for="silence_end_time">
-                            🌅 Fim do silêncio
+                            Fim do silêncio
                         </label>
                         <input type="time" 
                                id="silence_end_time" 
@@ -81,32 +82,14 @@
                 </div>
                 
                 <small class="help-text">
-                    💡 Exemplo: 22:00 até 08:00 (não receber notificações durante a noite)
+                    Exemplo: 22:00 até 08:00 (não receber notificações durante a noite)
                 </small>
-            </div>
-            
-            <!-- Notificações de Mudanças -->
-            <div class="form-section">
-                <h3>🔄 Notificações de Alterações</h3>
-                
-                <div class="form-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" 
-                               name="notify_changes" 
-                               value="1"
-                               <?php echo $preferences['notify_changes'] ? 'checked' : ''; ?>>
-                        <span>Notificar quando houver alterações em atividades</span>
-                    </label>
-                    <small class="help-text">
-                        Você será notificado se o título, prazo ou descrição de uma atividade for modificado.
-                    </small>
-                </div>
             </div>
             
             <!-- Botões de Ação -->
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
-                    💾 Salvar Configurações
+                    Salvar Configurações
                 </button>
                 <a href="index.php" class="btn btn-secondary">
                     ← Voltar ao Dashboard
@@ -116,7 +99,7 @@
     </div>
     
     <!-- Informações Adicionais -->
-    <div class="card info-card">
+    <!-- <div class="card info-card">
         <h3>ℹ️ Sobre as Notificações</h3>
         <ul class="info-list">
             <li>
@@ -136,5 +119,5 @@
                 O sistema verifica automaticamente novas atividades e mudanças a cada poucos minutos.
             </li>
         </ul>
-    </div>
+    </div> -->
 </div>
