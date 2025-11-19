@@ -141,7 +141,7 @@ class MoodleActivityGenerator {
 
 
     private function createCourse() {
-        $cursos = [[":id"=>1, ":fullname"=>"Metodologia cientifica",":shortname"=>"MC"], [":id"=>1, ":fullname"=>"Engenharia de Software", ":shortname"=>"ES"]];
+        $cursos = [[":id"=>1, ":fullname"=>"Metodologia cientifica",":shortname"=>"MC"], [":id"=>2, ":fullname"=>"Engenharia de Software", ":shortname"=>"ES"]];
         foreach ($cursos as $curso) {
             $sql = "INSERT INTO mdl_course (id, fullname, shortname, visible)
                 VALUES (:id, :fullname, :shortname, 1)

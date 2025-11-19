@@ -10,7 +10,7 @@ try {
     $notificationManager = new NotificationManager($conn);
     
     // Marcar todas como lidas
-    $notificationManager->markAllAsRead();
+    // $notificationManager->markAllAsRead();
     
     // Redirecionar de volta ao dashboard
     header('Location: index.php');
