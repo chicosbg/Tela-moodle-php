@@ -1,5 +1,11 @@
-é preciso abilitar o PDO no arquivo php.ini
+# requisitos
+- é preciso abilitar o PDO_mysql no arquivo php.ini
+- composer instalado
 
+# instalando
+```
+composer install
+```
 
 ## executando
 

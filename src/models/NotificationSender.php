@@ -7,9 +7,11 @@ use Conexao\DataBaseConnect;
 require_once __DIR__ . '/NotificationManager.php';
 require_once __DIR__ . '/UserPreferences.php';
 require_once __DIR__ . '/ActivityTracker.php';
-// use Models\NotificationManager;
-// use Models\UserPreferences;
-// use Models\ActivityTracker;
+
+use Controller\EmailController;
+use Models\NotificationManager;
+use Models\UserPreferences;
+use Models\ActivityTracker;
 
 class NotificationSender {
     private $pdo;
@@ -40,14 +42,16 @@ class NotificationSender {
         $activities = $this->getActivitiesNearDeadline($hours_before);
         
         $sent = 0;
+        $msgSuccess = 'fail';
         foreach ($activities as $activity) {
             $success = $this->sendDeadlineNotification($activity);
             if ($success) {
                 $sent++;
+                $msgSuccess = 'sucess';
             }
         }
         
-        return ['status' => 'success', 'sent' => $sent];
+        return ['status' => $msgSuccess, 'sent' => $sent];
     }
     
     /**
@@ -146,7 +150,7 @@ class NotificationSender {
                 a.duedate,
                 'assign' AS activity_type
             FROM mdl_assign a
-            JOIN mdl_course c ON a.course = c.id
+                JOIN mdl_course c ON a.course = c.id
             WHERE a.duedate > :now 
             AND a.duedate <= :threshold
         ";
@@ -160,7 +164,7 @@ class NotificationSender {
                 q.timeclose,
                 'quiz' AS activity_type
             FROM mdl_quiz q
-            JOIN mdl_course c ON q.course = c.id
+                JOIN mdl_course c ON q.course = c.id
             WHERE q.timeclose > :now 
             AND q.timeclose <= :threshold
         ";

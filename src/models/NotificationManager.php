@@ -1,8 +1,8 @@
 <?php
-
 namespace Models;
 
 use Conexao\DataBaseConnect;
+use Controller\EmailController;
 use PDO;
 
 class NotificationManager {
@@ -29,7 +29,7 @@ class NotificationManager {
         
         try {
             $stmt = $this->pdo->prepare($sql);
-            return $stmt->execute([
+            $stmt->execute([
                 ':user_id' => $this->user_id,
                 ':activity_id' => $activity_id,
                 ':activity_type' => $activity_type,
@@ -37,6 +37,10 @@ class NotificationManager {
                 ':title' => $title,
                 ':message' => $message
             ]);
+            $email = new EmailController() ;
+            
+            return $email->enviar($_ENV['MAIL_TESTE'], $title, $message);
+
         } catch (\Exception $e) {
             error_log("Erro ao criar notificação: " . $e->getMessage());
             return false;
