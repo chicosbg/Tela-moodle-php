@@ -12,4 +12,8 @@
         <div class="stat-number"><?php echo $notificacoes_nao_lidas; ?></div>
         <div class="stat-label">Notificações Não Lidas</div>
     </div>
+    <div class="stat-card">
+        <div class="stat-number"><?php echo count($estatisticas['cursos_ativos']); ?></div>
+        <div class="stat-label">Cursos Ativos</div>
+    </div>
 </div>
