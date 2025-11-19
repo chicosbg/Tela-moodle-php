@@ -210,3 +210,8 @@
 [2025-11-18 22:50:36] Atividade #49 criada (ID: 25, Tipo: assign)
 [2025-11-18 22:50:46] Atividade #50 criada (ID: 25, Tipo: quiz)
 [2025-11-18 22:50:46] Processo concluído! 50 atividades criadas.
+[2025-11-19 00:32:57] Iniciando gerador de atividades do Moodle...
+[2025-11-19 00:32:57] Configuração: 10s entre atividades, máximo: 50
+[2025-11-19 00:32:57] Atividade #1 criada (ID: 2, Tipo: assign)
+[2025-11-19 00:33:07] Atividade #2 criada (ID: 3, Tipo: assign)
+[2025-11-19 00:33:17] Atividade #3 criada (ID: 4, Tipo: assign)

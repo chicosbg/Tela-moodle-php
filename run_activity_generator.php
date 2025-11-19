@@ -2,9 +2,16 @@
 
 require_once 'src/conexao/DataBaseConnect.php';
 require_once 'ActivityGenerator/MoodleActivityGenerator.php';
+require_once 'vendor/autoload.php';
 
 use Conexao\DataBaseConnect;
 use ActivityGenerator\MoodleActivityGenerator;
+
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 // Configurações
 $config = [
@@ -22,8 +29,9 @@ if ($is_cli) {
     $options = getopt('f', ['foreground']);
     $run_foreground = isset($options['f']) || isset($options['foreground']);
     
-    if (!$run_foreground) {
-        // Daemon simples para segundo plano
+    // Check if we SHOULD fork and if we CAN fork (Linux/Mac only)
+    if (!$run_foreground && function_exists('pcntl_fork')) {
+        // Daemon simples para segundo plano (Linux/Unix)
         $pid = pcntl_fork();
         if ($pid == -1) {
             die("Erro ao criar processo filho\n");
@@ -33,7 +41,14 @@ if ($is_cli) {
             echo "Logs em: {$config['log_file']}\n";
             exit(0);
         }
-        // Processo filho continua
+        // Processo filho continua aqui...
+    } elseif (!$run_foreground && !function_exists('pcntl_fork')) {
+        // Fallback for Windows
+        echo "---------------------------------------------------------\n";
+        echo "AVISO: PCNTL não disponível (Ambiente Windows detectado).\n";
+        echo "O script executará em PRIMEIRO PLANO (Foreground).\n";
+        echo "Para parar o script, pressione CTRL + C.\n";
+        echo "---------------------------------------------------------\n\n";
     }
 }
 
