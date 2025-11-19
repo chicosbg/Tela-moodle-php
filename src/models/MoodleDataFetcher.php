@@ -19,9 +19,11 @@ class MoodleDataFetcher {
                 a.name AS titulo,
                 a.duedate AS data_entrega,
                 'TAREFA' AS tipo,
-                'assign' AS tipo_tabela
+                'assign' AS tipo_tabela,
+                c.fullname as curso
             FROM
                 mdl_assign a
+            LEFT JOIN mdl_course c on c.id = a.course  
             WHERE
                 a.duedate > UNIX_TIMESTAMP()
             
@@ -32,9 +34,11 @@ class MoodleDataFetcher {
                 q.name AS titulo,
                 q.timeclose AS data_entrega,
                 'QUESTIONÁRIO' AS tipo,
-                'quiz' AS tipo_tabela
+                'quiz' AS tipo_tabela,
+                c.fullname as curso
             FROM
                 mdl_quiz q
+            LEFT JOIN mdl_course c on c.id = q.course  
             WHERE
                 q.timeclose > UNIX_TIMESTAMP()
             ORDER BY

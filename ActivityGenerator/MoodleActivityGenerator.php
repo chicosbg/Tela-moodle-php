@@ -14,7 +14,6 @@ class MoodleActivityGenerator {
         $this->config = array_merge([
             'tempo_espera' => 30,
             'max_atividades' => 50,
-            'curso_padrao' => 2,
             'log_file' => 'moodle_activity_generator.log'
         ], $config);
     }
@@ -23,10 +22,13 @@ class MoodleActivityGenerator {
         $this->log("Iniciando gerador de atividades do Moodle...");
         $this->log("Configuração: {$this->config['tempo_espera']}s entre atividades, máximo: {$this->config['max_atividades']}");
         
+        $this->createCourse();
+
         while ($this->activities_created < $this->config['max_atividades']) {
             try {
                 // Escolhe aleatoriamente entre criar tarefa ou questionário
                 $activity_type = rand(0, 1) ? 'assign' : 'quiz';
+                
                 
                 if ($activity_type === 'assign') {
                     $activity_id = $this->createAssignment();
@@ -104,7 +106,7 @@ class MoodleActivityGenerator {
         
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            ':course' => $this->config['curso_padrao'],
+            ':course' => random_int(1,2),
             ':name' => $tarefa['nome'],
             ':intro' => $tarefa['descricao'],
             ':introformat' => 1,
@@ -135,6 +137,20 @@ class MoodleActivityGenerator {
         ]);
         
         return $this->pdo->lastInsertId();
+    }
+
+
+    private function createCourse() {
+        $cursos = [[":id"=>1, ":fullname"=>"Metodologia cientifica",":shortname"=>"MC"], [":id"=>1, ":fullname"=>"Engenharia de Software", ":shortname"=>"ES"]];
+        foreach ($cursos as $curso) {
+            $sql = "INSERT INTO mdl_course (id, fullname, shortname, visible)
+                VALUES (:id, :fullname, :shortname, 1)
+                ON DUPLICATE KEY UPDATE
+                    fullname = VALUES(fullname),
+                    visible = VALUES(visible);";
+
+            $stmt = $this->pdo->prepare($sql)->execute($curso);
+        }
     }
     
     private function createQuiz() {
